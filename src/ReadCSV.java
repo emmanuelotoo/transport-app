@@ -57,7 +57,12 @@ public class ReadCSV {
 
 
         // Finding total distance
-        double actual_distance = Double.parseDouble(adjacencyMatrix.get(row_start_index)[column_end_index]);
+        double actual_distance = 0.0;
+        try {
+            actual_distance = Double.parseDouble(adjacencyMatrix.get(row_start_index)[column_end_index]);
+        } catch (NumberFormatException e) {
+            System.out.println("Error parsing distance data. Using default value of 0.0");
+        }
 
         System.out.println("Start Location: " + start_location);
         System.out.println("Destination: " + destination);
@@ -80,29 +85,44 @@ public class ReadCSV {
     }
 
     // generates a single best next location to the current location
-    public static Double[] generateLandmark(List<String[]> r, String[] startArray, String[] destinationArray, Double total_distance, List<String> explored_paths, Double previous_distance, double parameter){
+    public static Double[] generateLandmark(List<String[]> r, String[] startArray, String[] destinationArray, Double total_distance, List<String> explored_paths, Double previous_distance, double parameter, String destination){
         // iterating through routes
         double min = 2.00;
         int minIndex = 0;
         Double[] minArray = new Double[2];
+        
+        // Find the column index for the destination
+        int dest_column_index = 0;
+        for (int j = 0; j < destinationArray.length; j++){
+            if (destinationArray[j].contains(destination)){
+                dest_column_index = j;
+                break;
+            }
+        }
 
         for(int i = 1; i< startArray.length; i++){
-            double i_ = Double.parseDouble(startArray[i]);
-            if (i_ < min && i_ != 0) {
-                // if the min, i < distance_of_previous_landmark from destination
-                if (Double.parseDouble(r.get(i)[5]) < previous_distance){
-                    min = Double.parseDouble(startArray[i]) + parameter; //We can add some values to this to get different routes.// I added 0.1 so it will ignore routes which are very close to it.
-                    minIndex = i;
-                }
-
-                // ignoring already explored landmarks.
-                for (String location: explored_paths){
-                    if (destinationArray[minIndex].contains(location)) {
-                        min = 22.00;
-                        break;
+            // Skip if the value is not a valid number (location name)
+            try {
+                double i_ = Double.parseDouble(startArray[i]);
+                if (i_ < min && i_ != 0) {
+                    // if the min, i < distance_of_previous_landmark from destination
+                    if (Double.parseDouble(r.get(i)[dest_column_index]) < previous_distance){
+                        min = Double.parseDouble(startArray[i]) + parameter; //We can add some values to this to get different routes.// I added 0.1 so it will ignore routes which are very close to it.
+                        minIndex = i;
                     }
-                }
 
+                    // ignoring already explored landmarks.
+                    for (String location: explored_paths){
+                        if (destinationArray[minIndex].contains(location)) {
+                            min = 22.00;
+                            break;
+                        }
+                    }
+
+                }
+            } catch (NumberFormatException e) {
+                // Skip this entry if it's not a number (it's a location name)
+                continue;
             }
         }
         minArray[0] = min;
@@ -129,16 +149,26 @@ public class ReadCSV {
         Double[] min_array = {};
 
         for (int j = 0; j< 5; j++){
-            min_array = generateLandmark(adjacencyMatrix, startArray, destinationArray,  actual_distance, exploredPathIndexes, current_distance_to_destination, parameter);
+            min_array = generateLandmark(adjacencyMatrix, startArray, destinationArray,  actual_distance, exploredPathIndexes, current_distance_to_destination, parameter, destination);
             int minIndex = min_array[1].intValue();
             double min = min_array[0];
 
 
             routes.put(destinationArray[minIndex], min);                        // update routes
             exploredPathIndexes.add(destinationArray[minIndex]);                // update explored_paths
-            if (j == 4) {routes.put(destination, Double.parseDouble(startArray[column_end_index]));} // after 3 landmarks
+            if (j == 4) {
+                try {
+                    routes.put(destination, Double.parseDouble(startArray[column_end_index]));
+                } catch (NumberFormatException e) {
+                    routes.put(destination, 0.0); // default distance if parsing fails
+                }
+            } // after 3 landmarks
             startArray = adjacencyMatrix.get(minIndex);
-            current_distance_to_destination = Double.parseDouble(startArray[column_end_index]);
+            try {
+                current_distance_to_destination = Double.parseDouble(startArray[column_end_index]);
+            } catch (NumberFormatException e) {
+                current_distance_to_destination = 0.0; // default if parsing fails
+            }
         }
 
         // print route
