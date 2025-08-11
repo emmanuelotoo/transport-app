@@ -60,7 +60,7 @@ public class Routes extends JFrame{
 		time2.setForeground(Color.black);
 		//time3.setForeground(Color.black);
 
-		bgimg = new ImageIcon("images/leg2(mod).jpg");
+		bgimg = new ImageIcon("images/university_of_ghana_sports_stadium01.jpg");
       	myLabel = new JLabel(bgimg);
       	myLabel.setSize(600, 400);
 

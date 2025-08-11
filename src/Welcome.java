@@ -13,7 +13,7 @@ public class Welcome extends JFrame
 	private ImageIcon bgimg;
 
 	public Welcome(){
-      bgimg = new ImageIcon("images/leg1(mod).jpg");
+      bgimg = new ImageIcon("images/ug.jpg");
       myLabel = new JLabel(bgimg);
       myLabel.setSize(350, 400);
 
