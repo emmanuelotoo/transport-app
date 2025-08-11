@@ -99,21 +99,33 @@ public class Activity extends JFrame{
 			dispose();
 			SelectedStartLoc = (String) start_locations.getSelectedItem();
 			SelectedStopLoc = (String) stop_locations.getSelectedItem();
+			
+			System.out.println("Selected Start Location: " + SelectedStartLoc);
+			System.out.println("Selected Stop Location: " + SelectedStopLoc);
+			
 			try {
 				FileWriter myWriter = new FileWriter("data/LocationQuery.txt");
 				myWriter.write(SelectedStartLoc + "\n");
 				myWriter.write(SelectedStopLoc);
 				myWriter.flush();
 				myWriter.close();
-			}	catch (IOException k){}
+				System.out.println("LocationQuery.txt file created successfully");
+			}	catch (IOException k){
+				System.out.println("Error writing to LocationQuery.txt: " + k.getMessage());
+				k.printStackTrace();
+			}
 
 			String[] n = {""};
 			try {
+				System.out.println("Calling ReadCSV.main()...");
 				ReadCSV.main(n);
+				System.out.println("ReadCSV.main() completed successfully");
 			} catch (IOException | CsvException ioException) {
+				System.out.println("Error in ReadCSV.main(): " + ioException.getMessage());
 				ioException.printStackTrace();
 			}
 
+			System.out.println("Opening Routes window...");
 			new Routes();
 
 		}

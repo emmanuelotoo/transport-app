@@ -24,6 +24,7 @@ public class Routes extends JFrame{
 	{
 	
 		try(Scanner scanner = new Scanner(new File("data/GeneratedRoutes.txt"))) {
+			System.out.println("Reading GeneratedRoutes.txt file...");
 			String source1 = scanner.nextLine();
 			String d1 = scanner.nextLine();
 			String t1 = scanner.nextLine();
@@ -33,6 +34,11 @@ public class Routes extends JFrame{
 			String source3 = scanner.nextLine();
 			String d3 = scanner.nextLine();
 			String t3 = scanner.nextLine();
+			
+			System.out.println("Successfully read route data:");
+			System.out.println("Route 1: " + source1);
+			System.out.println("Distance 1: " + d1);
+			System.out.println("Time 1: " + t1);
 
 		
 			
@@ -142,7 +148,19 @@ public class Routes extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	catch (FileNotFoundException e) {
-
+		System.out.println("Error: GeneratedRoutes.txt file not found!");
+		e.printStackTrace();
+		
+		// Create a basic error display
+		JLabel errorLabel = new JLabel("Error: Could not load route data!");
+		errorLabel.setForeground(Color.RED);
+		setTitle("Routes page - Error");
+		setLayout(new FlowLayout());
+		add(errorLabel);
+		setSize(400, 200);
+		setLocationRelativeTo(null);
+		setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}}
 
 	public class AgainButtonHandler implements ActionListener{
