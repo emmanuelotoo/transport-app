@@ -1,9 +1,41 @@
+# Compiled Java class files
 *.class
-~$Addresses.xlsx
-/java_dependencies
-/bin
-/dummy_data.csv
-/addresses.txt
+
+# IDE files
 *.iml
-.idea
-out
+.idea/
+.vscode/
+.settings/
+.project
+.classpath
+
+# Build directories
+/bin/
+/out/
+/target/
+/build/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# Test output files (keep source data)
+/java_dependencies/
+
+# Generated data files (these are created by the application)
+# Uncomment if you don't want to track generated results:
+# data/GeneratedRoutes.txt
+# data/DetailedRouteAnalysis.txt
