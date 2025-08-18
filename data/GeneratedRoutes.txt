@@ -1,9 +1,9 @@
-Department of Computer Science Legon => Department of Mathematics and Statistics Legon
-0.096887907 km
+School of Economics and Development Legon => Faculty of Arts Legon
+0.085840421 km
 1.5 mins
-Department of Computer Science => Department of Mathematics and Statistics
-0.096887907 km
+School of Economics and Development => Faculty of Arts
+0.085840421 km
 1.5 mins
-Department of Computer Science => Department of Mathematics and Statistics
-0.096887907 km
+School of Economics and Development => Faculty of Arts
+0.085840421 km
 1.5 mins

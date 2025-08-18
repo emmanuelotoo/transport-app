@@ -29,33 +29,56 @@ public class EnhancedRoutesGUI extends JFrame {
     
     private UGRouteNavigator navigator;
     private UGRouteNavigator.RouteResults lastResults;
-    
-    // Campus locations for dropdown
-    private String[] campusLocations = {
-        "Department of Computer Science",
-        "Balme Library",
-        "University of Ghana Sports Stadium",
-        "Commonwealth Hall",
-        "Legon Hall",
-        "School of Engineering",
-        "Faculty of Arts",
-        "University Hospital",
-        "Night Market",
-        "Volta Hall",
-        "Akuafo Hall",
-        "School of Business",
-        "Central Mosque",
-        "UG Banking Square",
-        "Bush Canteen",
-        "Athletic Oval"
-    };
+    private String[] campusLocations;
     
     public EnhancedRoutesGUI() {
         navigator = new UGRouteNavigator();
+        loadCampusLocations();
         initializeComponents();
         layoutComponents();
         addEventListeners();
         setFrameProperties();
+    }
+    
+    /**
+     * Load all campus locations from the CSV file
+     */
+    private void loadCampusLocations() {
+        try {
+            // Use the ReadCSV class to load the adjacency matrix
+            java.util.List<String[]> adjacencyMatrix;
+            try (com.opencsv.CSVReader reader = new com.opencsv.CSVReader(new java.io.FileReader("Scrapper/Addresses.csv"))) {
+                adjacencyMatrix = reader.readAll();
+            }
+            
+            if (adjacencyMatrix != null && !adjacencyMatrix.isEmpty()) {
+                // First row contains all location names
+                campusLocations = adjacencyMatrix.get(0);
+                System.out.println("✅ Loaded " + campusLocations.length + " campus locations from CSV");
+                
+                // Print first few locations for verification
+                System.out.println("📍 Sample locations:");
+                for (int i = 0; i < Math.min(5, campusLocations.length); i++) {
+                    System.out.println("   " + (i+1) + ". " + campusLocations[i]);
+                }
+                System.out.println("   ... and " + (campusLocations.length - 5) + " more locations");
+            } else {
+                // Fallback to basic locations if CSV loading fails
+                campusLocations = new String[]{"Error loading locations - check CSV file"};
+                System.err.println("❌ Failed to load locations from CSV");
+            }
+        } catch (Exception e) {
+            System.err.println("❌ Error loading campus locations: " + e.getMessage());
+            e.printStackTrace();
+            // Fallback locations
+            campusLocations = new String[]{
+                "Department of Computer Science",
+                "Balme Library", 
+                "University of Ghana Sports Stadium",
+                "Faculty of Arts",
+                "School of Engineering"
+            };
+        }
     }
     
     private void initializeComponents() {
