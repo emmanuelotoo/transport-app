@@ -1,9 +1,9 @@
-School of Economics and Development Legon => Faculty of Arts Legon
-0.085840421 km
-1.0 mins
-School of Economics and Development Legon => Department of Philosophy and Classics Legon => Faculty of Arts Legon
-0.086480704 km
-1.0 mins
-School of Economics and Development Legon => Cedi Conference Centre Legon => Department of Economics Conference Facility Legon => Faculty of Arts Legon
-0.096602168 km
-1.0 mins
+Commonwealth Hall => Balme Library
+0.512654166 km
+6.0 mins
+Commonwealth Hall => Balme Library
+0.512654166 km
+6.0 mins
+Commonwealth Hall => Balme Library
+0.512654166 km
+6.0 mins
