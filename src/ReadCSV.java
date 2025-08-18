@@ -289,11 +289,22 @@ public class ReadCSV {
     // distance and time of a given route
     public static double[] distance_time(Map<String, Double> routes){
         double distance = 0.0;
-        double average_walking_speed = 4.0; // km/h - realistic campus walking speed (was 5.0)
+        double average_walking_speed = 5.0; // km/h - normal walking speed
+        final double MAX_REASONABLE_CAMPUS_DISTANCE = 6.0; // km - max reasonable campus distance
 
-        // Calculate total distance
+        // Calculate total distance with validation
         for (String name: routes.keySet()) {
             double segmentDistance = routes.get(name);
+            
+            // Apply distance correction for unrealistic values
+            if (segmentDistance > MAX_REASONABLE_CAMPUS_DISTANCE) {
+                System.out.println("⚠️  WARNING: Unrealistic distance detected: " + segmentDistance + " km");
+                System.out.println("   Applying correction factor...");
+                // Apply correction factor based on the assumption that very long distances are measurement errors
+                segmentDistance = Math.min(segmentDistance * 0.4, MAX_REASONABLE_CAMPUS_DISTANCE);
+                System.out.println("   Corrected distance: " + segmentDistance + " km");
+            }
+            
             distance += segmentDistance;
         }
 
@@ -305,7 +316,7 @@ public class ReadCSV {
         System.out.println("Distance: " + String.format("%.3f", distance) + " km");
         System.out.println("Time calculation: " + String.format("%.3f", distance) + " km ÷ " + average_walking_speed + " km/h × 60 = " + String.format("%.1f", timeInMinutes) + " minutes");
         
-        // More realistic time calculation - don't force minimum of 1 minute for very short distances
+        // More realistic time calculation
         double timeTaken;
         if (timeInMinutes < 1.0) {
             timeTaken = Math.round(timeInMinutes * 10) / 10.0; // Round to nearest 0.1 minute

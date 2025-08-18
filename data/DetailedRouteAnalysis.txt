@@ -1,8 +1,8 @@
 🏛️  UG NAVIGATE - DETAILED ROUTE ANALYSIS
 ==========================================
-From: School of Economics and Development Legon
-To: Faculty of Arts Legon
-Analysis Date: Mon Aug 18 15:02:32 UTC 2025
+From: Commonwealth Hall Legon
+To: Balme Library Legon
+Analysis Date: Mon Aug 18 15:31:06 UTC 2025
 
 📈 ALGORITHMS USED:
    • A* Search Algorithm: 1 route(s)
@@ -15,40 +15,40 @@ Analysis Date: Mon Aug 18 15:02:32 UTC 2025
 🛣️  ROUTE OPTIONS (6 total):
 =============================
 
-1. School of Economics and Development Legon => Faculty of Arts Legon
-   Algorithm: Direct Path Algorithm
-   Distance: 0.086 km
-   Time: 1.5 minutes
-   Efficiency: 0.06 km/min
-
-2. School of Economics and Development => Faculty of Arts
+1. Commonwealth Hall => Balme Library
    Algorithm: Dijkstra's Algorithm
-   Distance: 0.086 km
-   Time: 1.5 minutes
-   Efficiency: 0.06 km/min
+   Distance: 0.513 km
+   Time: 6.0 minutes
+   Efficiency: 0.09 km/min
 
-3. School of Economics and Development => Faculty of Arts
+2. Commonwealth Hall => Balme Library
    Algorithm: A* Search Algorithm
-   Distance: 0.086 km
-   Time: 1.5 minutes
-   Efficiency: 0.06 km/min
+   Distance: 0.513 km
+   Time: 6.0 minutes
+   Efficiency: 0.09 km/min
 
-4. School of Economics and Development => Faculty of Arts
+3. Commonwealth Hall => Balme Library
    Algorithm: Floyd-Warshall Algorithm
-   Distance: 0.086 km
-   Time: 1.5 minutes
-   Efficiency: 0.06 km/min
+   Distance: 0.513 km
+   Time: 6.0 minutes
+   Efficiency: 0.09 km/min
 
-5. School of Economics and Development Legon => Department of Philosophy and Classics Legon => Faculty of Arts Legon
+4. Commonwealth Hall Legon => School of Economics and Development Legon => Balme Library Legon
+   Algorithm: Direct Path Algorithm
+   Distance: 0.513 km
+   Time: 6.0 minutes
+   Efficiency: 0.09 km/min
+
+5. Commonwealth Hall Legon => School of Economics and Development Legon => Balme Library Legon
    Algorithm: Alternative Path Algorithm 1
-   Distance: 0.086 km
-   Time: 1.5 minutes
-   Efficiency: 0.06 km/min
+   Distance: 0.513 km
+   Time: 6.0 minutes
+   Efficiency: 0.09 km/min
 
-6. School of Economics and Development Legon => Cedi Conference Centre Legon => Department of Economics Conference Facility Legon => Faculty of Arts Legon
+6. Commonwealth Hall Legon => Volta Hall Legon => Department of Economics Conference Facility Legon => Balme Library Legon
    Algorithm: Alternative Path Algorithm 2
-   Distance: 0.097 km
-   Time: 1.5 minutes
-   Efficiency: 0.06 km/min
+   Distance: 0.535 km
+   Time: 6.0 minutes
+   Efficiency: 0.09 km/min
 
 ✅ Analysis complete - All routes evaluated using advanced algorithms
