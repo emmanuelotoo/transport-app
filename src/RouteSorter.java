@@ -1,17 +1,7 @@
 import java.util.*;
 
-/**
- * Route sorting utilities implementing Quick Sort and Merge Sort algorithms
- * for organizing routes by distance, time, and other criteria
- */
 public class RouteSorter {
     
-    /**
-     * Sort routes by distance using Quick Sort algorithm
-     * @param routes Array of routes to sort
-     * @param low Starting index
-     * @param high Ending index
-     */
     public static void quickSortByDistance(Route[] routes, int low, int high) {
         if (low < high) {
             int pivotIndex = partitionByDistance(routes, low, high);
@@ -20,9 +10,6 @@ public class RouteSorter {
         }
     }
     
-    /**
-     * Partition function for Quick Sort by distance
-     */
     private static int partitionByDistance(Route[] routes, int low, int high) {
         double pivot = routes[high].distance;
         int i = low - 1;

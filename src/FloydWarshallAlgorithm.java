@@ -1,14 +1,4 @@
-/**
- * Implementation of Floyd-Warshall Algorithm for finding shortest paths
- * between all pairs of vertices in the University of Ghana campus
- */
 public class FloydWarshallAlgorithm {
-    
-    /**
-     * Floyd-Warshall algorithm to find shortest paths between all pairs of locations
-     * @param adjacencyMatrix The distance matrix between locations
-     * @return 2D array of shortest distances between all pairs of locations
-     */
     public static double[][] findAllPairsShortestPaths(java.util.List<String[]> adjacencyMatrix) {
         if (adjacencyMatrix == null || adjacencyMatrix.isEmpty()) {
             return null;
@@ -17,7 +7,6 @@ public class FloydWarshallAlgorithm {
         int n = adjacencyMatrix.get(0).length;
         double[][] distances = new double[n][n];
         
-        // Initialize distance matrix
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (i == j) {
@@ -34,7 +23,6 @@ public class FloydWarshallAlgorithm {
             }
         }
         
-        // Floyd-Warshall algorithm
         for (int k = 0; k < n; k++) {
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
@@ -52,14 +40,6 @@ public class FloydWarshallAlgorithm {
         return distances;
     }
     
-    /**
-     * Get shortest distance between two specific locations using pre-computed Floyd-Warshall results
-     * @param distances The result from Floyd-Warshall algorithm
-     * @param locations Array of location names
-     * @param startLocation Starting location name
-     * @param endLocation Destination location name
-     * @return Shortest distance between the two locations, or -1 if not found
-     */
     public static double getShortestDistance(double[][] distances, String[] locations, 
                                            String startLocation, String endLocation) {
         int startIndex = -1, endIndex = -1;
@@ -81,14 +61,6 @@ public class FloydWarshallAlgorithm {
         return (distance == Double.POSITIVE_INFINITY) ? -1 : distance;
     }
     
-    /**
-     * Find all locations within a certain distance from a starting location
-     * @param distances The result from Floyd-Warshall algorithm
-     * @param locations Array of location names
-     * @param startLocation Starting location name
-     * @param maxDistance Maximum distance threshold
-     * @return List of locations within the specified distance
-     */
     public static java.util.List<String> findLocationsWithinDistance(double[][] distances, String[] locations,
                                                                     String startLocation, double maxDistance) {
         java.util.List<String> nearbyLocations = new java.util.ArrayList<>();
@@ -115,29 +87,15 @@ public class FloydWarshallAlgorithm {
         return nearbyLocations;
     }
     
-    /**
-     * Check if there's a path between two locations
-     * @param distances The result from Floyd-Warshall algorithm
-     * @param locations Array of location names
-     * @param startLocation Starting location name
-     * @param endLocation Destination location name
-     * @return true if a path exists, false otherwise
-     */
     public static boolean hasPath(double[][] distances, String[] locations,
                                  String startLocation, String endLocation) {
         return getShortestDistance(distances, locations, startLocation, endLocation) > 0;
     }
     
-    /**
-     * Print the distance matrix in a readable format (for debugging)
-     * @param distances The distance matrix
-     * @param locations Array of location names
-     */
     public static void printDistanceMatrix(double[][] distances, String[] locations) {
         System.out.println("Floyd-Warshall All-Pairs Shortest Distances:");
         System.out.println("============================================");
         
-        // Print header
         System.out.printf("%-30s", "From/To");
         for (int i = 0; i < Math.min(locations.length, 5); i++) {
             String shortName = locations[i].replace(" Legon", "").replace(" and ", "&");
@@ -148,7 +106,6 @@ public class FloydWarshallAlgorithm {
         }
         System.out.println();
         
-        // Print rows
         for (int i = 0; i < Math.min(distances.length, 5); i++) {
             String shortName = locations[i].replace(" Legon", "").replace(" and ", "&");
             if (shortName.length() > 25) {

@@ -1,5 +1,3 @@
-//package src;
-
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
@@ -39,12 +37,10 @@ public class Activity extends JFrame{
       	startL = new JLabel("Start: ", SwingConstants.LEFT);
 		stopL = new JLabel("Stop: ", SwingConstants.LEFT);
 
-		//Initializing button
 		searchB = new JButton("Search");
 		sbHandler = new SearchButtonHandler();
 		searchB.addActionListener(sbHandler);
 
-		//Initializing combobox
 		start_locations = new JComboBox<String>();
 
 		for(int i = 1; i < all_locations.length; i++){

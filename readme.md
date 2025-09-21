@@ -1,5 +1,3 @@
-# UG Navigate
-
 A Java desktop application for finding optimal walking routes between locations on the University of Ghana campus using advanced pathfinding algorithms.
 
 ## Features

@@ -1,5 +1,3 @@
-//package src;
-
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import java.lang.Math; 
@@ -11,28 +9,25 @@ public class ReadCSV {
 
     public static <e> void main(String[] args) throws IOException, CsvException {
 
-        String filename = "Scrapper/Addresses.csv";                 // represents our adjacency matrix
+        String filename = "Scrapper/Addresses.csv";
         String start_location = "";
         String destination = "";
 
-        List<String[]> adjacencyMatrix;                             // data from csv (adjacency matrix)
+        List<String[]> adjacencyMatrix;
 
-        // Reading start location and destination
         try(Scanner scanner = new Scanner(new File("data/LocationQuery.txt"))) {
             start_location = scanner.nextLine();
             destination = scanner.nextLine();
         } catch (IOException e) {}
 
-        // reading csv file into adjacencyMatrix.
         try (CSVReader reader = new CSVReader(new FileReader(filename))){
             adjacencyMatrix = reader.readAll();
         }
 
-        int row_start_index = 0;            // index of the row on which the start location is.
-        int column_end_index = 0;           // index of the column on which the stop location exist.
+        int row_start_index = 0;
+        int column_end_index = 0;
 
         for(String[] array: adjacencyMatrix){
-            // get index of destination from first row
             if (adjacencyMatrix.indexOf(array) == 0){
                 for (int i = 0; i < array.length; i++){
                     if (array[i].contains(destination)){
@@ -48,7 +43,6 @@ public class ReadCSV {
             }
         }
 
-        // Finding total distance
         double actual_distance = 0.0;
         try {
             actual_distance = Double.parseDouble(adjacencyMatrix.get(row_start_index)[column_end_index]);
@@ -63,10 +57,8 @@ public class ReadCSV {
         System.out.println("Direct Distance: " + actual_distance + " km");
         System.out.println();
 
-        // Generate routes using multiple advanced algorithms
         List<Route> allRoutes = new ArrayList<>();
 
-        // 1. Standard Routes (backward compatibility)
         System.out.println("🔄 Generating standard routes...");
         Route directRoute = generateDirectRoute(adjacencyMatrix, start_location, destination, row_start_index, column_end_index, actual_distance);
         directRoute.algorithmUsed = "Direct Path Algorithm";

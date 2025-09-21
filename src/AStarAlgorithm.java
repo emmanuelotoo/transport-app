@@ -1,19 +1,12 @@
 import java.util.*;
 
-/**
- * Implementation of A* (A Star) Search Algorithm for optimal pathfinding
- * with heuristic-based search for University of Ghana campus navigation
- */
 public class AStarAlgorithm {
     
-    /**
-     * Node class for A* algorithm with f, g, h values
-     */
     static class AStarNode implements Comparable<AStarNode> {
         int vertex;
-        double gScore; // Actual distance from start
-        double hScore; // Heuristic distance to goal
-        double fScore; // g + h
+        double gScore;
+        double hScore;
+        double fScore;
         AStarNode parent;
         
         public AStarNode(int vertex, double gScore, double hScore) {
@@ -30,49 +23,32 @@ public class AStarAlgorithm {
         }
     }
     
-    /**
-     * Simple heuristic function - uses straight-line distance estimation
-     * In a real implementation, this could use actual coordinates
-     * For now, we'll use a simplified heuristic based on location types
-     */
     private static double heuristic(String[] locations, int current, int goal) {
-        // Simple heuristic: estimate based on location categories
         String currentLoc = locations[current].toLowerCase();
         String goalLoc = locations[goal].toLowerCase();
         
-        // Base heuristic value
         double baseHeuristic = 0.5;
-        
-        // Adjust heuristic based on location types
         if (currentLoc.contains("department") && goalLoc.contains("department")) {
-            baseHeuristic = 0.3; // Departments are usually close to each other
+            baseHeuristic = 0.3;
         } else if (currentLoc.contains("hall") && goalLoc.contains("hall")) {
-            baseHeuristic = 0.4; // Halls are in residential areas
+            baseHeuristic = 0.4;
         } else if (currentLoc.contains("school") && goalLoc.contains("school")) {
-            baseHeuristic = 0.3; // Schools are in academic areas
+            baseHeuristic = 0.3;
         } else if ((currentLoc.contains("department") && goalLoc.contains("school")) ||
                    (currentLoc.contains("school") && goalLoc.contains("department"))) {
-            baseHeuristic = 0.2; // Academic buildings are close
+            baseHeuristic = 0.2;
         } else if (currentLoc.contains("hospital") || goalLoc.contains("hospital")) {
-            baseHeuristic = 0.8; // Hospital might be farther
+            baseHeuristic = 0.8;
         } else if (currentLoc.contains("sports") || goalLoc.contains("sports")) {
-            baseHeuristic = 0.6; // Sports facilities might be farther
+            baseHeuristic = 0.6;
         }
         
-        // Add some randomness based on hash to make it more realistic
         int hash = (currentLoc + goalLoc).hashCode();
-        double variation = (hash % 100) / 1000.0; // Small variation
+        double variation = (hash % 100) / 1000.0;
         
         return Math.max(0.1, baseHeuristic + variation);
     }
     
-    /**
-     * A* pathfinding algorithm
-     * @param adjacencyMatrix The distance matrix between locations
-     * @param startLocation Starting location name
-     * @param endLocation Destination location name
-     * @return Route object with the optimal path considering heuristics
-     */
     public static Route findOptimalPath(List<String[]> adjacencyMatrix, String startLocation, String endLocation) {
         if (adjacencyMatrix == null || adjacencyMatrix.isEmpty()) {
             return null;
@@ -81,7 +57,6 @@ public class AStarAlgorithm {
         String[] locations = adjacencyMatrix.get(0);
         int n = locations.length;
         
-        // Find indices of start and end locations
         int startIndex = -1, endIndex = -1;
         for (int i = 0; i < locations.length; i++) {
             if (locations[i].contains(startLocation)) {
@@ -96,7 +71,6 @@ public class AStarAlgorithm {
             return null;
         }
         
-        // A* algorithm setup
         PriorityQueue<AStarNode> openSet = new PriorityQueue<>();
         Set<Integer> closedSet = new HashSet<>();
         Map<Integer, AStarNode> nodeMap = new HashMap<>();
