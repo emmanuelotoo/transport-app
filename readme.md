@@ -1,10 +1,10 @@
-A Java desktop application for finding optimal walking routes between locations on the University of Ghana campus using advanced pathfinding algorithms.
+A Java gui application for finding optimal walking routes between locations on the University of Ghana campus using advanced pathfinding algorithms.
 
 ## Features
 
 - Multiple pathfinding algorithms (Dijkstra, A*, Floyd-Warshall, Greedy)
 - Route sorting and optimization
-- Two user interfaces: Basic GUI and Enhanced GUI
+- Two user interfaces: Basic GUI and Enhanced GUI(use the EnhancedRoutesGUI)
 - 121+ campus locations
 - Real-time route analysis and rating system
 
@@ -63,6 +63,10 @@ java -cp "src:opencsv-5.8.jar:commons-lang3-3.12.0.jar:commons-text-1.10.0.jar" 
 java -cp "src:opencsv-5.8.jar:commons-lang3-3.12.0.jar:commons-text-1.10.0.jar" ReadCSV
 ```
 
+## Main Page
+<img width="1918" height="1006" alt="image" src="https://github.com/user-attachments/assets/ff52ef4e-bee4-4429-ab6a-66be7fda4366" />
+
+
 ## Data
 
 ### Campus Data
@@ -73,7 +77,3 @@ java -cp "src:opencsv-5.8.jar:commons-lang3-3.12.0.jar:commons-text-1.10.0.jar" 
 - LocationQuery.txt - Selected start/end locations
 - GeneratedRoutes.txt - Calculated route data
 - DetailedRouteAnalysis.txt - Comprehensive analysis reports
-
-## License
-
-Educational use - University of Ghana Computer Science Department
